@@ -59,13 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 for(Task t : tasks){
                     String d1 = String.format("%02d",i2)+ "-" + String.format("%02d",i1+1) + "-" + String.valueOf(i);
                     String d2 = dayFormat.format(t.getDate());
-                    if(d1.equals(d2))
+                    if(d1.equals(d2) && !t.getDone())
                         dailyTasks.add(t);
                 }
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 TaskAdapter adapter = new TaskAdapter(getApplicationContext(), dailyTasks);
                 recyclerView.setAdapter(adapter);
+
+
                 addTask.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                             Log.d("Description", taskDescription.getText().toString());
                                             Log.d("Date", sdf.format(choose));
                                             dailyTasks.add(t);
+                                            tasks.add(t);
                                             adapter.tasks = dailyTasks;
                                             adapter.notifyDataSetChanged();
                                         } catch (ParseException e) {

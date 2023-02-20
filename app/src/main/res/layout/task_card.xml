@@ -48,6 +48,7 @@
         android:layout_gravity="right"/>
 
     <Button
+        android:id="@+id/removeTask"
         app:icon="@drawable/baseline_done_24"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"

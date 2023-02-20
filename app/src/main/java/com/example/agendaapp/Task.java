@@ -9,10 +9,21 @@ public class Task {
 
     Date date;
 
+    Boolean done;
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
     public Task(String taskName, String taskDescription, Date date) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.date = date;
+        this.done=false;
     }
 
     public Task() {
