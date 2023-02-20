@@ -2,7 +2,8 @@
 android:orientation="vertical"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="10dp"
+    >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,6 +11,7 @@ android:layout_height="wrap_content"
         android:text="Ajouter une tâche"
         android:textSize="25dp"
         android:textFontWeight="900"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         android:textColor="@color/dark"/>
     <EditText
@@ -31,4 +33,11 @@ android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:fontFamily="sans-serif"
     android:hint="Description"/>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:layout_gravity="center"/>
 </LinearLayout>

@@ -1,14 +1,15 @@
 package com.example.agendaapp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Task {
     String taskName;
     String taskDescription;
 
-    Long date;
+    Date date;
 
-    public Task(String taskName, String taskDescription, Long date) {
+    public Task(String taskName, String taskDescription, Date date) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.date = date;
@@ -17,11 +18,11 @@ public class Task {
     public Task() {
     }
 
-    public Long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -39,5 +40,8 @@ public class Task {
 
     public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+    public String getTime(){
+        return new SimpleDateFormat("HH:mm").format(date);
     }
 }
