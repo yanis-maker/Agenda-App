@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         List<Task> tasks = new TaskRepository().getTasks();
 
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -51,10 +53,18 @@ public class MainActivity extends AppCompatActivity {
                 cardDate.setVisibility(View.VISIBLE);
                 addTask.setVisibility(View.VISIBLE);
 
-                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                List<Task> dailyTasks = new ArrayList<Task>();
 
-                TaskAdapter adapter = new TaskAdapter(getApplicationContext(), tasks);
+                SimpleDateFormat dayFormat = new SimpleDateFormat("dd-MM-yyyy");
+                for(Task t : tasks){
+                    String d1 = String.format("%02d",i2)+ "-" + String.format("%02d",i1+1) + "-" + String.valueOf(i);
+                    String d2 = dayFormat.format(t.getDate());
+                    if(d1.equals(d2))
+                        dailyTasks.add(t);
+                }
+                RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                TaskAdapter adapter = new TaskAdapter(getApplicationContext(), dailyTasks);
                 recyclerView.setAdapter(adapter);
                 addTask.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -65,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         View subView = inflater.inflate(R.layout.task_dialog, null);
                         TimePicker timePicker = (TimePicker) subView.findViewById(R.id.timePicker);
                         timePicker.setIs24HourView(true);
+
 
                         builder.setView(subView)
                                 .setPositiveButton("Ajouter", new DialogInterface.OnClickListener() {
@@ -80,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                                             Log.d("Name", taskName.getText().toString());
                                             Log.d("Description", taskDescription.getText().toString());
                                             Log.d("Date", sdf.format(choose));
-                                            tasks.add(t);
-                                            adapter.tasks = tasks;
+                                            dailyTasks.add(t);
+                                            adapter.tasks = dailyTasks;
                                             adapter.notifyDataSetChanged();
                                         } catch (ParseException e) {
                                             throw new RuntimeException(e);
