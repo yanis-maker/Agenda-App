@@ -36,6 +36,7 @@ public class TaskAdapter extends RecyclerView.Adapter<ViewTaskHolder>{
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tasks.get(holder.getAdapterPosition()).setDone(true);
                 tasks.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
             }
